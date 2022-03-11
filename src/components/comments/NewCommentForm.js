@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useHttp from '../../hooks/use-http';
 import { addComment } from '../../lib/api';
@@ -7,7 +7,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './NewCommentForm.module.css';
 
 const NewCommentForm = (props) => {
-  const commentTextRef = useRef();
+  const [enteredComment, setEnteredComment] = useState('');
 
   const { sendRequest, status, error } = useHttp(addComment);
 
@@ -21,9 +21,19 @@ const NewCommentForm = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    const enteredText = commentTextRef.current.value;
-    sendRequest({ commentData: { text: enteredText }, quoteId });
+
+    if (enteredComment.trim().length === 0) {
+      return;
+    }
+
+    sendRequest({ commentData: { text: enteredComment }, quoteId });
   };
+
+  const onChangeCommentHandler = (event) => {
+    setEnteredComment(event.target.value)
+  }
+
+  const isButtonDisabled = enteredComment.trim().length === 0;
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
@@ -34,10 +44,19 @@ const NewCommentForm = (props) => {
       }
       <div className={classes.control} onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
-        <textarea id='comment' rows='5' ref={commentTextRef}></textarea>
+        <textarea
+          id='comment'
+          rows='5'
+          onChange={onChangeCommentHandler}
+          value={enteredComment}
+        ></textarea>
       </div>
       <div className={classes.actions}>
-        <button className='btn'>Add Comment</button>
+        <button
+          disabled={isButtonDisabled}
+          className={isButtonDisabled ? 'btn--disabled' : 'btn'}>
+          Add Comment
+        </button>
       </div>
     </form>
   );

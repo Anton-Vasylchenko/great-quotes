@@ -32,6 +32,16 @@ body {
   cursor: pointer;
 }
 
+.btn--disabled {
+  text-decoration: none;
+  background-color: grey;
+  color: white;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid grey;
+  opacity: 0.5;
+}
+
 .btn:hover,
 .btn:active {
   background-color: #11acac;
@@ -53,4 +63,13 @@ body {
 .btn--flat:active {
   background-color: teal;
   color: white;
+}
+
+textarea {
+  resize: none;
+}
+
+.error {
+  border: 1px solid red !important;
+  background: rgba(230, 191, 191, 0.233) !important;
 }

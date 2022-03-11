@@ -1,13 +1,19 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
+import logoImg from '../../assets/images/logo.png'
+
 import styles from './MainNavigation.module.css';
 
 function MainNavigation() {
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
-                <Link to="/">GQ</Link>
+                <Link to="/">
+                    <div className={styles.logo}>
+                        <img src={logoImg} alt="logo" />
+                    </div>
+                </Link>
             </div>
             <nav className={styles.nav}>
                 <ul>
