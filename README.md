@@ -1,3 +1,3 @@
 # DEMO
 
-https://anton-vasylchenko.github.io/great-quotes/build/
+https://greatquotes-13742.web.app/
